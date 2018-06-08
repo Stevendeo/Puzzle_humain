@@ -32,13 +32,13 @@ let make_smpl_card w = {w = w;devant=None;derriere=None;gauche=None;droite=None}
 
 let print_option fmt x =
   match x with
-    None -> Format.fprintf fmt "X "
+    None -> Format.fprintf fmt "X"
   | Some x -> 
     
-    Format.fprintf fmt "%3d" x
+    Format.fprintf fmt "%d" x
 
 let print_card fmt x = if x.w = "" then () else
-  Format.fprintf fmt 
+  (*Format.fprintf fmt 
     "___________________________\n\
      |           %a            |\n\
      |                         |\n\
@@ -52,7 +52,20 @@ let print_card fmt x = if x.w = "" then () else
      |_________________________|\n\n\n"
 
  print_option (x.devant) print_option x.gauche x.w print_option x.droite print_option ( x.derriere)
-  
+  *)
+Format.fprintf fmt 
+"\\begin{frame}\n\
+ \\begin{center}\n\
+  \\begin{tikzpicture}[]\n\
+  \\draw (0,0) node{%s};
+  \\draw (0,3) node{%a};
+  \\draw (0,-3) node{%a};
+  \\draw (5,0) node{%a};
+  \\draw (-5,0) node{%a};
+  \\end{tikzpicture}\n\
+ \\end{center}\n\
+\\end{frame}
+" x.w print_option (x.devant) print_option (x.derriere) print_option x.droite print_option x.gauche 
                               
 let read_file ch_in : string array array =
 
@@ -179,7 +192,6 @@ let _ =
   for i=0 to nb_line-1 do
     for j= 0 to nb_col-1 do
       (complete_cards i j);
-      Format.fprintf ( Format.formatter_of_out_channel stdout) "%a" print_card mat.(i).(j)
     done
   done;
     
@@ -187,11 +199,18 @@ let _ =
   let ch_out =
     if (Array.length Sys.argv = 2)
     then
-      open_out (Sys.argv.(1)^".out")
+      open_out (Sys.argv.(1)^".tex")
     else
       Pervasives.stdout
   in
 
   let fmt = Format.formatter_of_out_channel ch_out in
-
+  Format.fprintf fmt
+    "\\documentclass{beamer}\n\
+     \\usepackage[utf8]{inputenc}\n\
+     \\usepackage[french]{babel} \n\
+     \\usepackage{tikz}\n\
+     \\setbeamertemplate{navigation symbols}{}\n\ 
+     \\begin{document}\n";
   Array.iter (Array.iter (print_card fmt)) mat;
+  Format.fprintf fmt "\\end{document}\n"

@@ -1,8 +1,6 @@
-########################################################################################################
-#                                                                                                      #
-#                                           PUZZLE HUMAIN                                              #
-#                                                                                                      #
-########################################################################################################
+################################################################################
+#                                 PUZZLE HUMAIN                                #
+################################################################################
 
 Comment compiler: 
 
@@ -12,19 +10,26 @@ ocamlopt -o puzzle_humain str.cmxa puzzle_word.ml
 
 Comment utiliser: 
 
-"puzzle_humain" prend entrée un fichier texte en argument. Chaque carte est générée à partir d'un mot du texte et placé en fonction des autres selon leur position dans le texte.
+"puzzle_humain" prend entrée un fichier texte en argument. Chaque carte est 
+générée à partir d'un mot du texte et placé en fonction des autres selon leur 
+position dans le texte.
 
 Par exemple, dans le texte: 
 
 "Je suis un informaticien
  et j'aime bien coder."
 
-Le mot "Je" sera dans une carte située en haut à gauche du puzzle. "suis" sera à sa droite et "et" sera en dessous.
-Le texte n'a pas besoin d'être un carré ni un rectangle. Par exemple, il est possible de générer un puzzle à partir de: 
+Le mot "Je" sera dans une carte située en haut à gauche du puzzle. "suis" sera 
+à sa droite et "et" sera en dessous.
+Le texte n'a pas besoin d'être un carré ni un rectangle. Par exemple, il est 
+possible de générer un puzzle à partir de: 
 
 "Je suis un 
 informaticien et j'aime bien
 coder."
+
+"puzzle_humain" génère un fichier .tex qui peut etre transformé en pdf avec 
+pdflatex. Il faut cependant avoir installé latex et l'extension "tikz".
 
 
 Licence:
