@@ -34,3 +34,56 @@ pdflatex. Il faut cependant avoir installé latex et l'extension "tikz".
 
 Licence:
 Ce code et les exemples associés sont sous Licence Creative Commons BY-SA.
+
+################################################################################
+#                                   ANIMATION                                  #
+################################################################################
+
+Le principe est le suivant : il faut reconstituer le texte à la manière d'un
+puzzle dans lequel le bord de chaque pièce est représenté par un numéro. Chaque
+numéro est représenté sur 2 pièces adjacentes. Une fois que toutes les paires ont
+été faites, le puzzle est complété.
+Dans cette activité, on propose successivement 3 algorithmes chronométrés. A la 
+fin de chaque algorithme on demande aux participants d'expliquer ce qui s'est passé,
+si c'était efficace ou non.
+* 1. Séquentiel. On choisit une pièce qui se place et on lui donne un bâton de 
+parole. Une fois placée, le propriétaire du bâton de parole appelle au hasard un 
+des numéros de sa fiche qui n'est pas déjà placé, la laisse se placer et lui donne
+le bâton de parole. On continue jusqu'à ce que le puzzle soit terminé.
+Cette stratégie est celle qui ressemble le plus à comment résoudre un puzzle dans 
+la vie réelle, une pièce après l'autre, mais elle a 2 problèmes. Le premier est 
+qu'il est possible de se retrouver bloqué, car il arrive qu'une pièce qui ait le 
+bâton de parole n'ait plus de voisin libre sans pour autant que le puzzle soit 
+terminé. Il faut alors rajouter une règle, celle de permettre aux pièces de passer
+le bâton de parole à des voisins déjà placés. Le second problème est que cet 
+algorithme n'est pas très efficace en terme de temps. C'est un algorithme 
+séquentiel.
+
+* 2. Distribué anarchique. Cet algorithme est le plus simple de tous : les pièces
+doivent se retrouver toutes seules. La seule chose qu'elles ont le droit de faire
+est d'appeler les numéros qui sont sur leur feuille : interdiction de regarder les
+feuilles des autres (à vrai dire ils le font quand même, ce n'est pas très grave).
+Cette stratégie est plus efficace, mais aussi très bruyante et c'est là tout le 
+problème. Il faut qu'il y ait assez de monde (je ne l'ai jamais fait en dessous de
+16) pour que les pièces ne puissent pas se retrouver facilement à cause du brouhaha.
+
+A partir de là on peut demander aux participants de proposer leur propre
+algorithme, mais s'ils sèchent le suivant est plus efficace que le précédent.
+
+3. Distribué ordonné. On commence soit par placer une pièce au hasard, soit par
+placer les 4 coins si on sait que le puzzle est un carré. Chaque pièce placée peut
+librement appeler un de des voisins libres et seules les pièces placées ont le droit 
+de parler.
+Cette stratégie est un compromis entre les 2 premières : on se développe rapidement 
+et on limite la quantité de bruit.
+
+Question animation des algorithmes, je conseille à 1 ou 2 animateurs de participer à
+chaque algorithme (surtout le premier). L'objectif du 1e algorithme est de faire 
+apparaître le bug, mais en général les participants ne choisissent pas au hasard le 
+numéro de leur feuille ; ils vont spontanément suivre une certaine régularité. L'idéal 
+est d'avoir une personne qui brise le chemin régulier pour forcer à tomber dans le cas
+ou l'algorithme va se bloquer.
+Si on veut aller plus loin, on peut leur proposer de faire un des algorithmes avec un
+puzzle qui n'est ni carré ni rectangulaire, voire même pas connexe (2 puzzles différents)
+sans prévenir à l'avance. Ça peut casser les stratégies qui se basent sur le fait que les
+puzzles aient 4 coins, comme par exemple la 3.
